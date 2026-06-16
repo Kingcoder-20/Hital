@@ -2,3 +2,4 @@ flask
 flask-cors
 werkzeug
 pytz
+gunicorn==23.0.0
