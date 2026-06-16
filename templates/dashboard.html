@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard – Hilal Exchange</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      color: white;
+      padding-bottom: 40px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 28px;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo { font-size: 18px; font-weight: bold; }
+    .logo span { color: #4fc3f7; }
+
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+
+    #navUsername {
+      color: rgba(255,255,255,0.75);
+      font-size: 14px;
+    }
+
+    .logout-btn {
+      padding: 7px 18px;
+      border-radius: 20px;
+      background: rgba(220,50,50,0.3);
+      border: 1px solid rgba(220,50,50,0.5);
+      color: #ffaaaa;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .logout-btn:hover { background: rgba(220,50,50,0.5); }
+
+    .container {
+      max-width: 860px;
+      margin: 36px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .welcome-banner {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px;
+      padding: 28px 24px;
+    }
+
+    .welcome-banner h1 { font-size: 24px; margin-bottom: 6px; }
+    .welcome-banner p { color: rgba(255,255,255,0.6); font-size: 14px; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .stat-card .icon { font-size: 32px; margin-bottom: 10px; }
+    .stat-card h3 { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 6px; }
+    .stat-card .value { font-size: 26px; font-weight: bold; color: #4fc3f7; }
+
+    .actions {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px;
+      padding: 28px 24px;
+    }
+
+    .actions h2 { font-size: 18px; margin-bottom: 18px; }
+
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+    }
+
+    .action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 20px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      color: white;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .action-btn:hover { background: rgba(255,255,255,0.14); transform: translateY(-3px); }
+    .action-btn .icon { font-size: 28px; }
+
+    footer {
+      margin-top: 20px;
+      text-align: center;
+      color: rgba(255,255,255,0.4);
+      font-size: 12px;
+      padding: 0 20px;
+    }
+
+    footer a { color: rgba(255,255,255,0.5); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Hilal <span>Exchange</span></div>
+    <div class="nav-right">
+      <span id="navUsername">Loading...</span>
+      <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div class="welcome-banner">
+      <h1>Welcome back, <span id="welcomeName" style="color:#4fc3f7;">...</span> 👋</h1>
+      <p>Here's a quick overview of your Hilal Exchange account.</p>
+    </div>
+
+    <div class="cards">
+      <div class="stat-card">
+        <div class="icon">💰</div>
+        <h3>Balance</h3>
+        <div class="value">₦0.00</div>
+      </div>
+      <div class="stat-card">
+        <div class="icon">🔄</div>
+        <h3>Exchanges</h3>
+        <div class="value">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="icon">✅</div>
+        <h3>Status</h3>
+        <div class="value" style="font-size:16px; color: #aaffcc;">Active</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <h2>Quick Actions</h2>
+      <div class="action-grid">
+        <div class="action-btn" onclick="comingSoon()">
+          <span class="icon">💸</span>
+          Send Money
+        </div>
+        <div class="action-btn" onclick="comingSoon()">
+          <span class="icon">📥</span>
+          Receive
+        </div>
+        <div class="action-btn" onclick="comingSoon()">
+          <span class="icon">📊</span>
+          History
+        </div>
+        <div class="action-btn" onclick="comingSoon()">
+          <span class="icon">⚙️</span>
+          Settings
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p><a href="https://wa.me/qr/SAH2B7LOUBY4K1">Contact Support</a> &nbsp;·&nbsp; ©2026 Hilal Dev.</p>
+  </footer>
+
+  <script>
+    // Pull username from session cookie info via a lightweight fetch,
+    // or just read what Flask injected as a JS variable.
+    // Since Flask session is server-side, we ping /dashboard/info for user data.
+    async function loadUser() {
+      try {
+        const res = await fetch("/dashboard/info");
+        const data = await res.json();
+        if (data.success) {
+          const name = data.username || "User";
+          document.getElementById("welcomeName").textContent = name;
+          document.getElementById("navUsername").textContent = name;
+        } else {
+          // Not logged in — redirect
+          window.location.href = "/login";
+        }
+      } catch {
+        window.location.href = "/login";
+      }
+    }
+
+    function comingSoon() {
+      alert("This feature is coming soon! Stay tuned 🚀");
+    }
+
+    loadUser();
+  </script>
+
+</body>
+</html>
