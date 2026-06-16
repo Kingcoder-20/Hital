@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hilal Exchange</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+      color: white;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 32px;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: white;
+    }
+
+    .nav-logo span { color: #4fc3f7; }
+
+    .nav-links { display: flex; gap: 14px; }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 15px;
+      padding: 8px 18px;
+      border-radius: 20px;
+      transition: background 0.2s;
+    }
+
+    .nav-links a:hover { background: rgba(255,255,255,0.15); }
+
+    .nav-links .btn-nav {
+      background: darkblue;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    .nav-links .btn-nav:hover { background: #0000cc; }
+
+    /* ── HERO ── */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+      background: radial-gradient(ellipse at center, rgba(79,195,247,0.12) 0%, transparent 70%);
+    }
+
+    .hero-tag {
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #4fc3f7;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 64px);
+      line-height: 1.15;
+      max-width: 720px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 span { color: #4fc3f7; }
+
+    .hero p {
+      font-size: clamp(15px, 2.5vw, 19px);
+      color: rgba(255,255,255,0.72);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+
+    .btn-primary {
+      padding: 16px 44px;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      background: darkblue;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.5);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: #0000bb; transform: scale(1.04); }
+
+    .btn-outline {
+      padding: 16px 44px;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.5);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-outline:hover { background: rgba(255,255,255,0.1); transform: scale(1.04); }
+
+    /* ── BADGES ── */
+    .badges {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 0 24px 60px;
+    }
+
+    .badge {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    /* ── FEATURES ── */
+    .features {
+      padding: 60px 24px;
+      background: rgba(0,0,0,0.25);
+      text-align: center;
+    }
+
+    .features h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .features .sub {
+      color: rgba(255,255,255,0.6);
+      font-size: 15px;
+      margin-bottom: 40px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px;
+      padding: 28px 20px;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .feature-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.12); }
+
+    .feature-icon { font-size: 36px; margin-bottom: 14px; }
+
+    .feature-card h3 { font-size: 18px; margin-bottom: 8px; }
+
+    .feature-card p { color: rgba(255,255,255,0.62); font-size: 14px; line-height: 1.6; }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+      padding: 60px 24px;
+      text-align: center;
+    }
+
+    .how h2 { font-size: 28px; margin-bottom: 10px; }
+    .how .sub { color: rgba(255,255,255,0.6); font-size: 15px; margin-bottom: 40px; }
+
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .step {
+      flex: 1 1 200px;
+      max-width: 240px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .step-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: darkblue;
+      border: 2px solid rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .step h3 { font-size: 16px; }
+    .step p { color: rgba(255,255,255,0.6); font-size: 13px; text-align: center; line-height: 1.5; }
+
+    /* ── CTA BANNER ── */
+    .cta {
+      padding: 60px 24px;
+      background: rgba(0,0,0,0.3);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .cta h2 { font-size: 28px; }
+    .cta p { color: rgba(255,255,255,0.68); font-size: 16px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: rgba(0,0,0,0.4);
+      padding: 24px;
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 13px;
+    }
+
+    footer a { color: rgba(255,255,255,0.6); text-decoration: none; }
+    footer a:hover { color: white; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-logo">Hilal <span>Exchange</span></div>
+    <div class="nav-links">
+      <a href="/login">Login</a>
+      <a href="/signup" class="btn-nav">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-tag">Secure · Fast · Trusted</p>
+    <h1>Your Most Trusted <span>Exchange</span> Platform</h1>
+    <p>Send, receive, and manage your exchanges with confidence. Built for reliability and speed, backed by Hilal Dev.</p>
+    <div class="hero-btns">
+      <a href="/signup" class="btn-primary">Create Free Account</a>
+      <a href="/login" class="btn-outline">Login</a>
+    </div>
+  </section>
+
+  <!-- TRUST BADGES -->
+  <div class="badges">
+    <div class="badge">✅ Reliable</div>
+    <div class="badge">🔒 Secured</div>
+    <div class="badge">🏆 Trusted</div>
+    <div class="badge">⚡ Fast</div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <h2>Why Choose Hilal Exchange?</h2>
+    <p class="sub">Everything you need to exchange with peace of mind</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h3>Bank-Level Security</h3>
+        <p>Your data is protected with encrypted passwords and secure session management.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Instant Processing</h3>
+        <p>Exchanges are processed quickly so you never miss the right moment.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3>Always Available</h3>
+        <p>Access your account from any device, anywhere, anytime.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>24/7 Support</h3>
+        <p>Our team is always reachable via WhatsApp to help you when it matters.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how">
+    <h2>How It Works</h2>
+    <p class="sub">Get started in three simple steps</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Create Account</h3>
+        <p>Sign up with your email and set a secure password in under a minute.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Login</h3>
+        <p>Access your personal dashboard with your credentials anytime.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Start Exchanging</h3>
+        <p>Use the platform's tools to manage your exchanges securely.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta">
+    <h2>Ready to Get Started?</h2>
+    <p>Join thousands of users who trust Hilal Exchange every day.</p>
+    <a href="/signup" class="btn-primary">Create Your Free Account</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><a href="https://wa.me/qr/SAH2B7LOUBY4K1">📞 Contact Us on WhatsApp</a></p>
+    <p style="margin-top:8px;">©2026 Hilal Dev. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
+  
